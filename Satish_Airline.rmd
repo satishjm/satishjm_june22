@@ -1,0 +1,32 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+Here I am importing airline data
+
+```{r}
+library(haven)
+library(tidyverse)
+airline <- read_sas("http://www.principlesofeconometrics.com/sas/airline.sas7bdat", 
+    NULL)
+airline
+```
+Cleaning up data
+
+```{r}
+airline %>%
+ filter(Y >= 7.6 & Y <= 23.8) %>%
+ filter(W >= 0.76 & W <= 1.5) %>%
+ filter(R >= 
+    0.275 & R <= 0.52) %>%
+ filter(L >= 2.4 & L <= 6.9) %>%
+ filter(K >= 1.8 & K <= 
+    9.6) %>%
+ ggplot() +
+ aes(x = Y, y = W, fill = R) +
+ geom_point(size = 1L, colour = "#ef562d") +
+ scale_fill_gradient() +
+ theme_minimal()
+```
+
